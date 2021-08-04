@@ -1,0 +1,22 @@
+{
+    "ios": {
+        "debug": {
+            "codeSignIdentity": "iPhone Developer",
+            "developmentTeam": "XYX9889L84",
+            "packageType": "development",
+            "automaticProvisioning" : true,
+            "buildFlag": [
+                "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
+            ]
+        },
+        "release": {
+            "codeSignIdentity": "iPhone Developer",
+            "developmentTeam": "XYX9889L84",
+            "packageType": "app-store",
+            "automaticProvisioning" : true,
+            "buildFlag": [
+                "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES"
+            ]
+        }
+    }
+}
