@@ -159,32 +159,36 @@
  
  function doStartGeoTriggering()
  {
-     updateStatus("Starting GeoTriggering");
-     const geoTriggeringBuilder = new io.bluedot.cordova.plugin.GeoTriggeringBuilder();
- 
-     const androidNotificationParams = {
-           channelId: "Bluedot Cordova",
-           channelName: "Bluedot Cordova",
-           title: "Bluedot Foreground Service - Geo-triggering",
-           content:
-             "This app is running a foreground service using location services",
-           notificationId: 123,
-         };
- 
-     geoTriggeringBuilder
-         .androidNotification( // Required to run Geotriggering in Android
-             androidNotificationParams.channelId,
-             androidNotificationParams.channelName,
-             androidNotificationParams.title,
-             androidNotificationParams.content,
-             androidNotificationParams.notificationId
-         )
-     // Optional: receive a notification on App Restart after termination
-//        .iOSAppRestartNotification("Press here to restart the app", "Press here to restart the app")
-         .start(
-             () => updateStatus("Start Geotriggering Successful"),
-             (error) => updateStatus("Start Geotriggering Failed with error: " + error),
-         );
+    updateStatus("Starting GeoTriggering");
+    
+    if (device.platform === "iOS") {
+        updateStatus("Starting iOS GeoTriggering...");
+        io.bluedot.cordova.plugin.iOSStartGeoTriggering(
+            () => updateStatus("Start Geotriggering Successful"),
+            (error) => updateStatus("Start Geotriggering Failed with error: " + error)
+        );
+    } else if (device.platform === "Android") {
+        console.log("Starting Android GeoTriggering...");
+
+        const androidNotificationParams = {
+            channelId: "Bluedot Cordova",
+            channelName: "Bluedot Cordova",
+            title: "Bluedot Foreground Service - Geo-triggering",
+            content:
+              "This app is running a foreground service using location services",
+            notificationId: 123,
+          };
+
+          io.bluedot.cordova.plugin.androidStartGeoTriggering(
+            () => updateStatus("Start Geotriggering Successful"),
+            (error) => updateStatus("Start Geotriggering Failed with error: " + error),
+            androidNotificationParams.channelId,
+            androidNotificationParams.channelName,
+            androidNotificationParams.title,
+            androidNotificationParams.content,
+            androidNotificationParams.notificationId
+        );
+    }
  }
  
  function zoneUpdate( zoneInfos )
