@@ -259,28 +259,32 @@
      // Setting the Custom Event Metadata
      io.bluedot.cordova.plugin.setCustomEventMetaData( { "hs_OrderId": orderId } )
      updateStatus( "Set CustomEventMetadata { \"hs_OrderId\": \"" + orderId + "\" }" );
-     
-     const tempoBuilder = new io.bluedot.cordova.plugin.TempoBuilder();
- 
-     const androidNotificationParams = {
-         channelId: 'Bluedot Cordova',
-         channelName: 'Bluedot Cordova',
-         title: 'Bluedot Foreground Service - Tempo',
-         content: "This app is running a foreground service using location services"
-     }
- 
-     tempoBuilder
-         .androidNotification( // Required to run Tempo in Android
-             androidNotificationParams.channelId,
-             androidNotificationParams.channelName,
-             androidNotificationParams.title,
-             androidNotificationParams.content
-         )
-         .start(
-             destinationId.trim(),
-             () => updateStatus("Start Tempo Successful"),
-             (error) => updateStatus("Start Tempo Failed: " + error)
-         );
+
+     if (device.platform === "iOS") {
+        io.bluedot.cordova.plugin.iOSStartTempoTracking(
+            () => updateStatus("Start Tempo Successful"),
+            (error) => updateStatus("Start Tempo Failed: " + error),
+            destinationId);
+     } else if (device.platform === "Android") {
+        const androidNotificationParams = {
+            channelId: 'Bluedot Cordova',
+            channelName: 'Bluedot Cordova',
+            title: 'Bluedot Foreground Service - Tempo',
+            content: "This app is running a foreground service using location services",
+            notificationId: -1
+        }
+
+        io.bluedot.cordova.plugin.androidStartTempoTracking(
+            () => updateStatus("Start Tempo Successful"),
+            (error) => updateStatus("Start Tempo Failed: " + error),
+            destinationId,
+            androidNotificationParams.channelId,
+            androidNotificationParams.channelName,
+            androidNotificationParams.title,
+            androidNotificationParams.content,
+            androidNotificationParams.notificationId
+        );
+    }
  }
  
  function doStopTempoTracking()
