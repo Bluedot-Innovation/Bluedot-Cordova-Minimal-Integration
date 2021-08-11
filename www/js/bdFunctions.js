@@ -257,8 +257,11 @@
      orderId = document.getElementById( "orderId" ).value;
 
      // Setting the Custom Event Metadata
-     io.bluedot.cordova.plugin.setCustomEventMetaData( { "hs_OrderId": orderId } )
-     updateStatus( "Set CustomEventMetadata { \"hs_OrderId\": \"" + orderId + "\" }" );
+     if(orderId)
+     {
+        io.bluedot.cordova.plugin.setCustomEventMetaData( { "hs_OrderId": orderId } )
+        updateStatus( "Set CustomEventMetadata { \"hs_OrderId\": \"" + orderId + "\" }" );
+     }  
 
      if (device.platform === "iOS") {
         io.bluedot.cordova.plugin.iOSStartTempoTracking(
