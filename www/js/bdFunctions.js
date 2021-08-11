@@ -132,7 +132,7 @@
  {
      io.bluedot.cordova.plugin.reset(
          () => updateStatus("Reset Successful"),
-         (error) => updateStatus("Reset Failed with error: " + error),
+         (error) => updateStatus("Reset Failed with error: " + error)
      );
  }
  
