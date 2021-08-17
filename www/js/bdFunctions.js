@@ -156,6 +156,20 @@
  {
      updateStatus("Low Power Mode changed to " + isLowPowerMode);
  }
+ function doStartBGGeoTriggering(){
+ if (device.platform === "Android"){
+    console.log("Starting Android GeoTriggering...");
+    io.bluedot.cordova.plugin.androidStartGeoTriggering(
+                function () { updateStatus("Start BG Geotriggering Successful") },
+                function (error) { updateStatus("Start BG Geotriggering Failed with error: " + error) },
+                '',
+                '',
+                '',
+                '',
+                -1
+            );
+    }
+ }
 
  function doStartGeoTriggering()
  {
@@ -321,6 +335,7 @@
      document.getElementById( "resetButton" ).addEventListener( "click", doReset );
      document.getElementById( "isInitializedButton" ).addEventListener( "click", doIsInitialized );
      document.getElementById( "startGeoTriggeringButton" ).addEventListener( "click", doStartGeoTriggering );
+     document.getElementById( "startBGGeoTriggeringButton" ).addEventListener( "click", doStartBGGeoTriggering );
      document.getElementById( "stopGeoTriggeringButton" ).addEventListener( "click", doStopGeoTriggering  );
      document.getElementById( "isGeoTriggeringRunningButton" ).addEventListener( "click", doIsGeoTriggeringRunning );
      document.getElementById( "getZonesButton" ).addEventListener( "click", doGetZones );
