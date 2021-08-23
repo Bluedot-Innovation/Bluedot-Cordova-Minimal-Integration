@@ -38,7 +38,7 @@ var app = {
         document.getElementById( "projectId" ).value = projectId;
         document.getElementById( "destinationId" ).value = destinationId;
         document.getElementById( "orderId" ).value = orderId;
-        
+
         // Request Location When in Use Authorization
         cordova.plugins.diagnostic.requestLocationAuthorization(
             function(status)

@@ -157,7 +157,7 @@
      updateStatus("Low Power Mode changed to " + isLowPowerMode);
  }
  function doStartBGGeoTriggering(){
- if (device.platform === "Android"){
+ if (device.platform === "Android") {
     console.log("Starting Android GeoTriggering...");
     io.bluedot.cordova.plugin.androidStartGeoTriggering(
                 function () { updateStatus("Start BG Geotriggering Successful") },
@@ -168,6 +168,8 @@
                 '',
                 -1
             );
+    } else {
+      updateStatus("BG feature only supported for Android devices");
     }
  }
 
