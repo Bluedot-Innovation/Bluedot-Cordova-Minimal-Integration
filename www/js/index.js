@@ -38,13 +38,6 @@ var app = {
         document.getElementById( "projectId" ).value = projectId;
         document.getElementById( "destinationId" ).value = destinationId;
         document.getElementById( "orderId" ).value = orderId;
-
-        // Request Location When in Use Authorization
-        cordova.plugins.diagnostic.requestLocationAuthorization(
-            function(status)
-            {
-                console.log("Location Permission Status: " + status);
-            }, null, cordova.plugins.diagnostic.locationAuthorizationMode.WHEN_IN_USE);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {

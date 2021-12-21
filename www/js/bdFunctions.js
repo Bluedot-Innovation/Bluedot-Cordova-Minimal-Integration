@@ -72,6 +72,25 @@
              {
                  updateStatus("Location Permission Status: " + status);
              }, null, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+     } else {
+       cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+           switch(status){
+               case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                   updateStatus("Permission not requested");
+                   break;
+               case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                   updateStatus("Permission denied");
+                   break;
+               case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                   updateStatus("Permission granted always");
+                   break;
+               case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                   updateStatus("Permission granted only when in use");
+                   break;
+           }
+       }, function(error){
+           updateStatus(error);
+       }, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
      }
  }
 
