@@ -24,7 +24,7 @@
         ]
     },
     "devDependencies": {
-        "@bluedot-innovation/cordova-plugin": "git+https://github.com/Bluedot-Innovation/PointSDK-Plugin-Cordova.git#dev/4.0.0",
+        "@bluedot-innovation/cordova-plugin": "^4.0.0",
         "cordova-android": "^9.1.0",
         "cordova-ios": "^6.2.0",
         "cordova-plugin-device": "^2.0.3",
